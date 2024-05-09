@@ -2,12 +2,12 @@ use bigdecimal::BigDecimal;
 use serde::Deserialize;
 use uuid::Uuid;
 
-use crate::repositories::BankAccount;
+use super::BankAccount;
 
 #[derive(Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct WithdrawalRequestDto {
-    #[serde(flatten)]
+    #[serde(flatten)] // this flattens this struct into the nested struct. This is primarily for a better DRY effect.
     account: BankAccount,
 }
 
