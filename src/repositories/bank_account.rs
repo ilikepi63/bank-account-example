@@ -1,5 +1,3 @@
-use std::time::Duration;
-
 use axum::extract::FromRef;
 use bigdecimal::BigDecimal;
 use serde::{Deserialize, Serialize};
@@ -11,8 +9,6 @@ use crate::{
     AppState,
 };
 
-static DATABASE_TABLE_NAME: &str = "bank_account";
-
 #[derive(Serialize, Deserialize)]
 pub struct BankAccount {
     pub account_id: Uuid,
@@ -21,6 +17,7 @@ pub struct BankAccount {
 
 #[derive(Clone)]
 pub struct BankAccountRepository {
+    #[allow(unused)]
     database_connection: Pool<Postgres>,
 }
 
@@ -47,12 +44,12 @@ impl BankAccountRepository {
 
     pub async fn withdrawal_from_account_id(
         &self,
-        account_id: &Uuid,
-        amount: &BigDecimal,
+        _account_id: &Uuid,
+        _amount: &BigDecimal,
     ) -> GenericResult<()> {
         let rows_affected = 1;
         // let rows_affected = sqlx::query!(
-        //     "UPDATE {DATABASE_TABLE_NAME} SET balance = balance - $2 WHERE account_id = $1 AND balance >= $2;", 
+        //     "UPDATE bank_account SET balance = balance - $2 WHERE account_id = $1 AND balance >= $2;",
         //     account_id,
         //     amount
         // )

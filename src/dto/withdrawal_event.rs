@@ -6,6 +6,7 @@ use uuid::Uuid;
 #[serde(rename_all = "UPPERCASE")]
 pub enum WithdrawalStatus {
     Success,
+    #[allow(unused)]
     Failure,
 }
 
@@ -19,7 +20,7 @@ pub struct WithdrawalEventDto {
 impl WithdrawalEventDto {
     pub fn success(account_id: &Uuid, amount: &BigDecimal) -> Self {
         Self {
-            account_id: account_id.clone(),
+            account_id: *account_id,
             amount: amount.clone(),
             status: WithdrawalStatus::Success,
         }

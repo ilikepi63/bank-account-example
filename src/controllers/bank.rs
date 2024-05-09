@@ -1,14 +1,11 @@
 use axum::{
     extract::State,
-    response::Response,
     routing::{post, MethodRouter},
     Json,
 };
-use serde::Deserialize;
 
 use crate::{
     dto::{WithdrawalEventDto, WithdrawalRequestDto, WithdrawalResponseDto},
-    repositories::{BankAccount, BankAccountRepository, WithdrawalRepository},
     AppState,
 };
 
@@ -27,7 +24,7 @@ impl BankAccountController {
             .await;
 
         if withdrawal_result.is_ok() {
-            let _ = withdrawal_repository.notify_withdrawal(WithdrawalEventDto::success(
+            withdrawal_repository.notify_withdrawal(WithdrawalEventDto::success(
                 payload.account_id(),
                 payload.amount(),
             ));

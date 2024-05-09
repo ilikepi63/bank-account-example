@@ -1,13 +1,9 @@
 use anyhow::Ok;
 use axum::extract::FromRef;
-use bigdecimal::BigDecimal;
-use serde::Serialize;
-use uuid::Uuid;
 
 use crate::{dto::WithdrawalEventDto, errors::GenericResult, AppState};
 
 pub static WITHDRAWAL_EVENT_TOPIC_ARN: &str = "withdrawal_events";
-
 
 #[derive(Clone)]
 pub struct WithdrawalRepository {

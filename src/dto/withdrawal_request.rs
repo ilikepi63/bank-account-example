@@ -4,12 +4,11 @@ use uuid::Uuid;
 
 use crate::repositories::BankAccount;
 
-
 #[derive(Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct WithdrawalRequestDto {
     #[serde(flatten)]
-    account: BankAccount
+    account: BankAccount,
 }
 
 impl WithdrawalRequestDto {
